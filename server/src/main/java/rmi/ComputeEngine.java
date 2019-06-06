@@ -59,7 +59,6 @@ public class ComputeEngine implements Runnable, Closeable, Compute {
     public void run() {
         try {
             this.proxy = (Compute) UnicastRemoteObject.exportObject(this, this.port);
-
             this.registry = LocateRegistry.createRegistry(this.port);
             this.registry.bind(RMI_SERVER_NAME, this.proxy);
 

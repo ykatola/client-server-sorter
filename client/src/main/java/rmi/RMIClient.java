@@ -16,7 +16,6 @@ public class RMIClient implements Closeable {
     private Registry registry;
     private Compute proxy;
     private volatile String responseInfo;
-    private long timeToMesure;
 
     private RMIClient(String hostname, int port) throws RemoteException, NotBoundException {
         this.registry = LocateRegistry.getRegistry(hostname, port);
@@ -51,21 +50,24 @@ public class RMIClient implements Closeable {
             switch (request.get()) {
                 case PING:
                     proxy.ping();
+                    responseInfo = "Ping was successful";
                     break;
                 case ECHO:
                     responseInfo = proxy.echo(parameters[0]);
                     break;
                 case PROCESS:
                     process(parameters[0], parameters[1]);
+                    responseInfo = "Your request was processed";
                     break;
                 case GEN:
                     writeRandomCombinationToFile(parameters[0], parameters[1]);
+                    responseInfo = "Your request was processed";
                     break;
             }
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        return command;
+        return responseInfo;
     }
 
     private void process(String stringPathRandFile, String stringPathSortFile) {
