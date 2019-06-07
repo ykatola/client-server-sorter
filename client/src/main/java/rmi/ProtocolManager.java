@@ -6,7 +6,7 @@ public final class ProtocolManager {
         PING("Ping", 0),
         ECHO("Echo", 1),
         PROCESS("Process", 2),
-        GEN("Generate", 2);
+        GEN("Generate", 1);
 
         final String type;
         final int argumentsAmount;

@@ -60,7 +60,7 @@ public class RMIClient implements Closeable {
                     responseInfo = "Your request was processed";
                     break;
                 case GEN:
-                    writeRandomCombinationToFile(parameters[0], parameters[1]);
+                    writeRandomCombinationToFile(parameters[0]);
                     responseInfo = "Your request was processed";
                     break;
             }
@@ -116,7 +116,7 @@ public class RMIClient implements Closeable {
         }
     }
 
-    private void writeRandomCombinationToFile(String pathToDirect, String fileName) {
+    private void writeRandomCombinationToFile(String pathToFile) {
 
         int[] arrayRandNum = new int[1000000];
         boolean isRecreate = false;
@@ -132,7 +132,7 @@ public class RMIClient implements Closeable {
             }
         }
 
-        Path pathToDir = Paths.get(pathToDirect, fileName);
+        Path pathToDir = Paths.get(pathToFile);
         System.out.println(pathToDir.toString());
         File fileRandNum = new File(pathToDir.toString());
 
